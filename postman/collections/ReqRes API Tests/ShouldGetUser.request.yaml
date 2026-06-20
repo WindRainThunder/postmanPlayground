@@ -1,9 +1,9 @@
 $kind: http-request
-name: getUser2
+name: ShouldGetUser
 url: https://reqres.in/api/users/2
 method: GET
 headers:
-  x-api-key: "{{vault:auth_secret_0z6a}}"
+  x-api-key: "{{vault:x-api-key}}"
 queryParams:
   - key: ""
     value: ""
