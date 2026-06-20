@@ -1,0 +1,62 @@
+$kind: http-request
+name: createUser
+url: https://reqres.in/api/users
+method: POST
+headers:
+  x-api-key: "{{vault:auth_secret_0z6a}}"
+body:
+  type: json
+  content: "{\r
+
+    \"name\": \"Jan Kowalski\",\r
+
+    \"job\": \"QA Engineer\"\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: "// Parsujemy JSON z odpowiedzi\r
+
+      const json = pm.response.json();\r
+
+      \r
+
+      // status\r
+
+      pm.test(\"Status = 201\", () => {\r
+
+      \    pm.response.to.have.status(201);\r
+
+      });\r
+
+      \r
+
+      \r
+
+      pm.test(\"Name = Jan Kowalski\", () => {\r
+
+      \    pm.expect(json.name).to.eql(\"Jan Kowalski\");\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Job = QA Engineer\", () => {\r
+
+      \    pm.expect(json.job).to.eql(\"QA Engineer\");\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Should have property id\", () => {\r
+
+      \    pm.expect(json).to.have.property(\"id\");\r
+
+      });\r
+
+      \r
+
+      \r\n"
+    language: text/javascript
+order: 670622867346671

@@ -1,0 +1,55 @@
+$kind: http-request
+name: getUser2
+url: https://reqres.in/api/users/2
+method: GET
+headers:
+  x-api-key: "{{vault:auth_secret_0z6a}}"
+queryParams:
+  - key: ""
+    value: ""
+    disabled: true
+scripts:
+  - type: afterResponse
+    code: "// Parsujemy JSON z odpowiedzi\r
+
+      const json = pm.response.json();\r
+
+      \r
+
+      // status\r
+
+      pm.test(\"Status 200\", () => {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });\r
+
+      \r
+
+      // konkretne pola\r
+
+      pm.test(\"ID = 2\", () => {\r
+
+      \    pm.expect(json.data.id).to.eql(2);\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Poprawny email\", () => {\r
+
+      \    pm.expect(json.data.email).to.eql(\"janet.weaver@reqres.in\");\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Imię i nazwisko\", () => {\r
+
+      \    pm.expect(json.data.first_name).to.eql(\"Janet\");\r
+
+      \    pm.expect(json.data.last_name).to.eql(\"Weaver\");\r
+
+      });"
+    language: text/javascript
+order: 1781876997320
