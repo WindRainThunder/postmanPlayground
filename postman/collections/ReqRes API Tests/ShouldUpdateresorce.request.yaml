@@ -1,0 +1,22 @@
+$kind: http-request
+name: ShouldUpdateresorce
+url: https://reqres.in/api/users/2
+method: PATCH
+headers:
+  x-api-key: "{{vault:x-api-key}}"
+body:
+  type: json
+  content: |-
+    {
+    "job": "Lead QA Engineer"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      const json = pm.response.json();
+
+      pm.test("job = Lead QA Engineer", () => {
+          pm.expect(json.job).to.eql("Lead QA Engineer");
+      })
+    language: text/javascript
+order: 3218449008400308

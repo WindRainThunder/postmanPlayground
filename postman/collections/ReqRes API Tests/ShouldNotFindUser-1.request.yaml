@@ -1,5 +1,20 @@
 $kind: http-request
 name: ShouldNotFindUser
-url: ""
+url: https://reqres.in/api/users/23
 method: GET
+headers:
+  x-api-key: "{{vault:x-api-key}}"
+scripts:
+  - type: afterResponse
+    code: |
+      const json = pm.response.json();
+
+      pm.test("Status 404", () => {
+          pm.response.to.have.status(404);
+      });
+
+      pm.test("Empyt body", () => {
+          pm.response.to.have.body("{}");
+      });
+    language: text/javascript
 order: 2168020689281105
