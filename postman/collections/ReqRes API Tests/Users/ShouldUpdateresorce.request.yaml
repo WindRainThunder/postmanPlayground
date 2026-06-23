@@ -1,6 +1,6 @@
 $kind: http-request
 name: ShouldUpdateresorce
-url: https://reqres.in/api/users/2
+url: "{{base_url}}/api/users/{{userId}}"
 method: PATCH
 headers:
   x-api-key: "{{vault:x-api-key}}"
@@ -19,4 +19,4 @@ scripts:
           pm.expect(json.job).to.eql("Lead QA Engineer");
       })
     language: text/javascript
-order: 3218449008400308
+order: 4136493182274257

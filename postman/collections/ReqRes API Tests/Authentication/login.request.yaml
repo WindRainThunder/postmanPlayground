@@ -1,0 +1,30 @@
+$kind: http-request
+name: login
+url: "{{base_url}}/api/login"
+method: POST
+headers:
+  x-api-key: "{{vault:x-api-key}}"
+body:
+  type: json
+  content: |-
+    {
+    "email": "eve.holt@reqres.in",
+    "password": "cityslicka"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      const responseJson = pm.response.json();
+
+      pm.test("Status code is 200", function () {
+          pm.response.to.have.status(200);
+      });
+
+      pm.test("Response contains token", function () {
+          pm.expect(responseJson).to.have.property("token");
+      });
+
+      pm.environment.set("authToken", responseJson.token);
+      console.log("Token saved:", responseJson.token);
+    language: text/javascript
+order: 1782137635697

@@ -1,5 +1,9 @@
 $kind: collection
 name: ReqRes API Tests
+variables:
+  dynamicName: ""
+  dynamicJob: ""
+  createdUserId: ""
 auth:
   - id: faa37fbb-d995-419f-bca4-2a11d563035b
     type: apikey

@@ -1,0 +1,18 @@
+$kind: http-request
+name: ShouldDeleteUser
+url: "{{base_url}}/api/users/{{userId}}"
+method: DELETE
+headers:
+  x-api-key: "{{vault:x-api-key}}"
+scripts:
+  - type: afterResponse
+    code: |+
+      pm.test("Code = 204", () => {
+          pm.response.to.have.status(204);
+      })
+      pm.test("Empty Body", () => {
+          pm.response.to.have.body("");
+      })
+
+    language: text/javascript
+order: 4254070441316047

@@ -1,6 +1,6 @@
 $kind: http-request
 name: ShouldReplaceResource
-url: https://reqres.in/api/users/2
+url: "{{base_url}}/api/users/{{userId}}"
 method: PUT
 headers:
   x-api-key: "{{vault:x-api-key}}"
@@ -24,4 +24,4 @@ scripts:
           pm.expect(json.job).to.eql("Senior QA Engineer");
       });
     language: text/javascript
-order: 2478314683225710
+order: 3612011477219728

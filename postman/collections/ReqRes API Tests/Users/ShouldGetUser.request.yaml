@@ -1,13 +1,9 @@
 $kind: http-request
 name: ShouldGetUser
-url: https://reqres.in/api/users/2
+url: "{{base_url}}/api/users/{{userId}}"
 method: GET
 headers:
   x-api-key: "{{vault:x-api-key}}"
-queryParams:
-  - key: ""
-    value: ""
-    disabled: true
 scripts:
   - type: afterResponse
     code: "// Parsujemy JSON z odpowiedzi\r
@@ -52,4 +48,4 @@ scripts:
 
       });"
     language: text/javascript
-order: 1781876997320
+order: 1782137187255

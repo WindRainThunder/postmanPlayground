@@ -1,2 +1,8 @@
 name: DEV
-values: []
+values:
+  - key: base_url
+    value: ''
+  - key: userId
+    value: ''
+  - key: authToken
+    value: ''

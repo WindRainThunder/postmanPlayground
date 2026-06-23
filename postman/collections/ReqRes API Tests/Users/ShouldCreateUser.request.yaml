@@ -1,0 +1,101 @@
+$kind: http-request
+name: ShouldCreateUser
+url: "{{base_url}}/api/users/{{userId}}"
+method: POST
+headers:
+  x-api-key: "{{vault:x-api-key}}"
+body:
+  type: json
+  content: "{\r
+
+    \"name\": \"{{dynamicName}}\",\r
+
+    \"job\": \"{{dynamicJob}}\"\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: "const json = pm.response.json();\r
+
+      const dynamicName = pm.collectionVariables.get(\"dynamicName\");\r
+
+      pm.collectionVariables.set(\"createdUserId\", json.id);\r
+
+      pm.collectionVariables.set(\"createdUserId\", json.id);\r
+
+      \r
+
+      pm.test(\"Status = 201\", () => {\r
+
+      \    pm.response.to.have.status(201);\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Name = 'dynamicName'\", () => {\r
+
+      \    pm.expect(json.name).to.eql(dynamicName);\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Job = QA Engineer\", () => {\r
+
+      \    pm.expect(json.job).to.eql(\"QA Engineer\");\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Response has id\", () => {\r
+
+      \    pm.expect(json).to.have.property(\"id\");\r
+
+      })\r
+
+      \r
+
+      pm.test(\"Response has createdAt timestamp\", function () {\r
+
+      \    pm.expect(json).to.have.property(\"createdAt\");\r
+
+      });\r
+
+      \r
+
+      pm.test(\"createdAt is ISO 8601 format\", function () {\r
+
+      // Regex for date ISO 8601: YYYY-MM-DDTHH:mm:ss.sssZ\r
+
+      pm.expect(json.createdAt).to.match(/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}/);\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Response time is less than 2000ms\", function () {\r
+
+      \    pm.expect(pm.response.responseTime).to.be.below(2000);\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Content-Type is JSON\", function () {\r
+
+      \    pm.response.to.have.header(\"Content-Type\");\r
+
+      \    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r
+
+      });"
+    language: text/javascript
+  - type: beforeRequest
+    code: |
+      const timestamp = new Date().getTime();
+
+      pm.collectionVariables.set("dynamicName", "TestUser_" + timestamp);
+      pm.collectionVariables.set("dynamicJob", "QA Engineer");
+    language: text/javascript
+order: 3596484469458661

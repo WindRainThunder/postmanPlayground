@@ -1,6 +1,6 @@
 $kind: http-request
 name: ShouldNotFindUser
-url: https://reqres.in/api/users/23
+url: "{{base_url}}/api/users/{{userId}}"
 method: GET
 headers:
   x-api-key: "{{vault:x-api-key}}"
@@ -17,4 +17,4 @@ scripts:
           pm.response.to.have.body("{}");
       });
     language: text/javascript
-order: 2168020689281105
+order: 3596418218564139
