@@ -1,0 +1,26 @@
+name: Postman ReqRes Tests
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  postman-tests:
+    runs-on: ubuntu-latest
+    env:
+      REQRES_API_KEY: ${{ secrets.REQRES_API_KEY }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run Postman collection
+        uses: postmanlabs/postman-cli-action@v1
+        with:
+          command: >
+            collection run ./postman/collections/ReqRes\ API\ Tests
+            --environment ./postman/environments/DEV.environment.yaml
