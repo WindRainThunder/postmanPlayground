@@ -1,8 +1,10 @@
 name: DEV
 values:
   - key: base_url
-    value: ''
+    value: "https://reqres.in"
   - key: userId
-    value: ''
+    value: "2"
   - key: authToken
-    value: ''
+    value: ""
+  - key: reqres_api_key
+    value: ""
