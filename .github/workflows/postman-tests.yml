@@ -22,5 +22,5 @@ jobs:
         uses: postmanlabs/postman-cli-action@v1
         with:
           command: >
-            collection run ./postman/collections/ReqRes\ API\ Tests
+            collection run ./postman/collections/reqres-api-tests
             --environment ./postman/environments/DEV.environment.yaml
