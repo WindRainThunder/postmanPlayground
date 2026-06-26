@@ -3,7 +3,7 @@ name: ShouldGetUser
 url: "{{base_url}}/api/users/{{userId}}"
 method: GET
 headers:
-  x-api-key: "{{vault:x-api-key}}"
+  x-api-key: "{{reqres_api_key}}"
 scripts:
   - type: afterResponse
     code: "// Parsujemy JSON z odpowiedzi\r

@@ -3,7 +3,7 @@ name: ShouldCreateUser
 url: "{{base_url}}/api/users/{{userId}}"
 method: POST
 headers:
-  x-api-key: "{{vault:x-api-key}}"
+  x-api-key: "{{reqres_api_key}}"
 body:
   type: json
   content: "{\r

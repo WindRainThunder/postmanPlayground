@@ -3,7 +3,7 @@ name: login
 url: "{{base_url}}/api/login"
 method: POST
 headers:
-  x-api-key: "{{vault:x-api-key}}"
+  x-api-key: "{{reqres_api_key}}"
 body:
   type: json
   content: |-

@@ -3,7 +3,7 @@ name: ShouldDeleteUser
 url: "{{base_url}}/api/users/{{userId}}"
 method: DELETE
 headers:
-  x-api-key: "{{vault:x-api-key}}"
+  x-api-key: "{{reqres_api_key}}"
 scripts:
   - type: afterResponse
     code: |+
